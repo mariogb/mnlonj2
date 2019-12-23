@@ -1,0 +1,57 @@
+---
+micronaut:
+  application:
+    name: mnlonj2
+
+---
+micronaut:
+  server:
+    cors:
+      enable: true
+      configurations:
+        web:
+          exposedHeaders:
+            - Content-Type
+            - Content-Disposition
+            - Authorization
+---
+endpoints:
+  beans:
+    enabled: true
+    sensitive: true 
+  info:
+    enabled: true
+    sensitive: false  
+---
+micronaut:
+  ssl:
+      enabled: true
+      buildSelfSigned: true
+      port: 8777
+---
+micronaut:
+  security:
+    enabled: true
+    endpoints:
+      login:
+        enabled: true
+      oauth:
+        enabled: true
+    token:
+      jwt:
+        enabled: true
+        signatures:
+          secret:
+            generator:
+              secret: "${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecrsaetasdasdfsdasdDD4SllxaForANewOne}"
+
+---
+postgres:
+  reactive:
+    client:
+      port: 5432
+      host: localhost
+      database: dos
+      user: mario
+      password: 12345
+      maxSize: 7
