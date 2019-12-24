@@ -8,5 +8,4 @@ cd docks/postgresql
 
 docker build -t eg_postgresql .
 
-docker run  -P --name pg_test eg_postgresql -v ./db1:/var/lib/postgresql
-
+docker run -v ./db1:/var/lib/postgresql -P --name pg_test eg_postgresql
