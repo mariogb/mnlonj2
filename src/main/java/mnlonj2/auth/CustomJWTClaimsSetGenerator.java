@@ -10,7 +10,7 @@ import io.micronaut.security.token.config.TokenConfiguration;
 import io.micronaut.security.token.jwt.generator.claims.ClaimsAudienceProvider;
 import io.micronaut.security.token.jwt.generator.claims.JWTClaimsSetGenerator;
 import io.micronaut.security.token.jwt.generator.claims.JwtIdGenerator;
-import io.reactivex.annotations.Nullable;
+import javax.annotation.Nullable;
 import javax.inject.Singleton;
 import com.nimbusds.jwt.JWTClaimsSet;
 import io.micronaut.security.authentication.UserDetails;
