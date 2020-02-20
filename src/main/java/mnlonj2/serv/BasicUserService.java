@@ -19,7 +19,9 @@ import io.reactiverse.reactivex.pgclient.PgPool;
 import io.reactiverse.reactivex.pgclient.PgRowSet;
 import io.reactiverse.reactivex.pgclient.Row;
 import io.reactiverse.reactivex.pgclient.Tuple;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,22 +38,26 @@ public class BasicUserService {
 
   String sql0 = "select pname, pkey,password,id from user_lon where username = $1";
 //a
-  public Single<UserLon> findByUsername2(String username) {
+
+  public Single<List<UserLon>> findByUsername2(String username) {
 
     PgPool client = pgPoolClientFactory.client();
     Tuple arguments = Tuple.tuple();
     arguments.addString(username);
     return client.rxPreparedQuery(sql0, arguments).map((PgRowSet t) -> {
-      if(t.size()!=1){
-        return null;
+
+      List<UserLon> l_userLon = new ArrayList<>(1);
+
+      if (t.size() == 1) {
+        Row r = t.iterator().next();
+
+        System.out.println("r.getString(0)   " + r.getString(0));
+        UserLon userLon = new UserLon(r.getString(0), r.getString(1), username, r.getString(2));
+        userLon.setId(r.getLong(3));
+        l_userLon.add(userLon);
       }
-      
-      Row r = t.iterator().next();
-      
-      System.out.println("r.getString(0)   "+r.getString(0));
-      UserLon userLon = new UserLon(r.getString(0), r.getString(1), username, r.getString(2));
-      userLon.setId(r.getLong(3));
-      return userLon;
+
+      return l_userLon;
     });
 
   }

@@ -10,6 +10,7 @@ import io.micronaut.security.authentication.providers.UserState;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import mnlonj2.pojo.UserLon;
@@ -28,12 +29,11 @@ public class UserLonFetcherService implements UserFetcher {
 
   @Override
   public Publisher<UserState> findByUsername(String username) {
-    final Single<UserLon> r1 = basicUserService.findByUsername2(username);
-    final UserLon u = r1.blockingGet();
-    if(u==null){
+    final Single<List<UserLon>> l_u_single = basicUserService.findByUsername2(username);
+    final List<UserLon> l_u = l_u_single.blockingGet();
+    if(l_u.isEmpty()){
       return Flowable.empty();
     }
-   return (Publisher<UserState>)Flowable.just((UserState)u);
+   return (Publisher<UserState>)Flowable.just((UserState)l_u.get(0));
   }
-
 }

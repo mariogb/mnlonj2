@@ -34,7 +34,7 @@ micronaut:
     enabled: true
     endpoints:
       login:
-        enabled: true
+        enabled: false
       oauth:
         enabled: true
     token:

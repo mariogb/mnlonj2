@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mnlonj2.Cte;
 import mnlonj2.pojo.UserLon;
 import org.reactivestreams.Publisher;
 
@@ -36,6 +37,21 @@ public class CustomDelegatingAuthenticationProvider extends DelegatingAuthentica
     super(userFetcher, passwordEncoder, authoritiesFetcher);
   }
 
+  private void ml(String s){
+        System.out.println(Cte.ANSI_BRIGHT_BG_YELLOW + " "+ Cte.ANSI_PURPLE+ " "+s+" " +Cte.ANSI_RESET);
+
+  }
+  
+  @Override
+  public Publisher<AuthenticationResponse> authenticate(AuthenticationRequest authenticationRequest) {
+    
+    ml("Autenticando "+authenticationRequest.getIdentity());
+    return super.authenticate(authenticationRequest); //To change body of generated methods, choose Tools | Templates.
+  }
+  
+
+  
+  
   @Override
   protected Publisher<AuthenticationResponse> createSuccessfulAuthenticationResponse(AuthenticationRequest authenticationRequest, UserState userState) {
     if (userState instanceof UserLon) {

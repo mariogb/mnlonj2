@@ -6,7 +6,7 @@ plugins {
 }
 
 
-
+wrapper { gradleVersion = '6.0' }
 version "0.1"
 group "mnlonj2"
 
@@ -26,8 +26,10 @@ ext{
 dependencies {
   compile "org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion"
   annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
+  annotationProcessor "io.micronaut:micronaut-graal"
   annotationProcessor "io.micronaut:micronaut-inject-java"
   annotationProcessor "io.micronaut:micronaut-validation"
+  compileOnly "org.graalvm.nativeimage:svm"
   implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
   implementation "io.micronaut:micronaut-security-jwt"
   implementation "io.micronaut:micronaut-http-client"
@@ -46,8 +48,11 @@ dependencies {
     
   annotationProcessor "io.micronaut:micronaut-security"
   compile "io.micronaut:micronaut-security"
-   compile "org.postgresql:postgresql:42.2.6"
-   compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+  compile "org.postgresql:postgresql:42.2.6"
+  compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+  
+  compile 'com.hazelcast:hazelcast:4.0'
+
   
 }
 

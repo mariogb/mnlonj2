@@ -9,7 +9,6 @@ import io.micronaut.security.authentication.providers.PasswordEncoder;
 import javax.inject.Singleton;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 /**
  *
  * @author mario
